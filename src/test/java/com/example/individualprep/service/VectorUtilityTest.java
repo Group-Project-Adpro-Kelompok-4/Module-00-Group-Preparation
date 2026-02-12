@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class VectorUtilityTest {
 
@@ -119,5 +120,35 @@ class VectorUtilityTest {
         assertEquals(32.0, result);
     }
 
-}
+    @Test
+    void norm_computesNorm() {
+        VectorUtility vectorUtility = new VectorUtility();
 
+        assertEquals(13.0, vectorUtility.norm(new double[] {3.0, 4.0, 12.0}));
+        assertEquals(13.0, vectorUtility.norm(new double[] {3.0, -4.0, -12.0}));
+    }
+
+    @Test
+    void norm_handlesEmptyVector() {
+        VectorUtility vectorUtility = new VectorUtility();
+
+        assertEquals(0.0, vectorUtility.norm(new double[] {}));
+    }
+
+    @Test
+    void norm_throwsOnNullVector() {
+        VectorUtility vectorUtility = new VectorUtility();
+
+        assertThrows(IllegalArgumentException.class, () -> vectorUtility.norm(null));
+    }
+
+    @Test
+    void norm_handlesEdgeCases() {
+        VectorUtility vectorUtility = new VectorUtility();
+
+        assertEquals(Double.POSITIVE_INFINITY, vectorUtility.norm(new double[] {Double.POSITIVE_INFINITY, -4.0, -12.0}));
+        assertEquals(Double.POSITIVE_INFINITY, vectorUtility.norm(new double[] {Double.NEGATIVE_INFINITY, -4.0, -12.0}));
+        assertEquals(Double.POSITIVE_INFINITY, vectorUtility.norm(new double[] {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY}));
+        assertTrue(Double.isNaN(vectorUtility.norm(new double[] {3.0, -4.0, Double.NaN})));
+    }
+}
