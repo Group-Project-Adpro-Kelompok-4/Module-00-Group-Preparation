@@ -1,4 +1,4 @@
-name: CI
+name: CI Fakhri
 
 on:
   pull_request:
