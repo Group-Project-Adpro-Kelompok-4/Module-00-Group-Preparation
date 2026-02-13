@@ -16,6 +16,24 @@ class ArithmeticUtilityTest {
     }
 
     @Test
+    void divide_divides_operands() {
+        ArithmeticUtility arithmeticUtility = new ArithmeticUtility();
+
+        assertEquals(2.0, arithmeticUtility.divide(10.0, 5.0), 1e-9);
+        assertEquals(-3.0, arithmeticUtility.divide(6.0, -2.0), 1e-9);
+        assertEquals(0.5, arithmeticUtility.divide(1.0, 2.0), 1e-9);
+    }
+
+    @Test
+    void divide_edgeCases() {
+        ArithmeticUtility arithmeticUtility = new ArithmeticUtility();
+
+        assertEquals(Double.POSITIVE_INFINITY, arithmeticUtility.divide(Double.POSITIVE_INFINITY, 1.0), 1e-9);
+        assertEquals(Double.NEGATIVE_INFINITY, arithmeticUtility.divide(Double.NEGATIVE_INFINITY, 1.0), 1e-9);
+        assertEquals(Double.NaN, arithmeticUtility.divide(Double.NaN, 1.0));
+    }
+
+    @Test
     void add_addsOperands() {
         ArithmeticUtility arithmeticUtility = new ArithmeticUtility();
 
